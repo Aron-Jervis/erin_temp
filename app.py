@@ -1,23 +1,10 @@
-from flask import Flask, jsonify, request
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
-
-@app.get("/")
+@app.route("/")
 def home():
-    return jsonify(message="Hello, world!")
-
-
-@app.get("/health")
-def health():
-    return jsonify(status="ok")
-
-
-@app.post("/echo")
-def echo():
-    data = request.get_json(silent=True) or {}
-    return jsonify(data=data)
-
+    return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
